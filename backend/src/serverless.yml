@@ -1,0 +1,24 @@
+service: kurkees-admin-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1 # Change to your preferred AWS region
+  stage: ${opt:stage, 'dev'}
+  environment:
+    JWT_SECRET: ${ssm:/kurkees/jwt-secret, 'dev-fallback-secret'}
+    ADMIN_EMAIL: ${ssm:/kurkees/admin-email, 'admin@kurkees.local'}
+    ADMIN_PASSWORD_HASH: ${ssm:/kurkees/admin-password, 'password'}
+    FRONTEND_URL: ${ssm:/kurkees/frontend-url, '*'}
+    # DATABASE_URL added here in the next step
+
+plugins:
+  - serverless-plugin-typescript
+
+functions:
+  api:
+    handler: src/lambda.handler
+    events:
+      - httpApi:
+          path: '/{proxy+}'
+          method: '*'
