@@ -168,7 +168,7 @@ export default function OrdersPage() {
       });
 
       // Build Excel array
-      const excelData = [
+      const excelData: (string | number)[][] = [
         [
           "TrackingNumber", "Reference", "PackageDescription", "ReceiverName", 
           "ReceiverAddress", "ReceiverCity", "ReceiverContactNo", "NoOfPcs", 
