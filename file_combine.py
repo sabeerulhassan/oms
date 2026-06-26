@@ -117,6 +117,8 @@ def combine_files_to_clipboard(paths, extensions=None, ignore_files=DEFAULT_IGNO
 if __name__ == '__main__':
     paths = [
         "backend/src",
+        "package.json",
+        ".env"
         # "frontend/src"
     ]
     

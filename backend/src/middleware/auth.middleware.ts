@@ -19,9 +19,13 @@ export const requireAuth = (req: Request, res: Response, next: NextFunction) => 
   }
 
   const token = authHeader.split(' ')[1];
+  const secret = process.env.JWT_SECRET;
+
+  if (!secret) {
+    return next(new AppError('Server auth configuration error', 500));
+  }
 
   try {
-    const secret = process.env.JWT_SECRET || 'dev-fallback-secret';
     const decoded = jwt.verify(token, secret);
     req.user = decoded;
     next();

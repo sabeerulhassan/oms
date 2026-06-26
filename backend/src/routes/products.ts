@@ -13,12 +13,13 @@ const router = Router();
 
 // Public routes
 router.get("/", getProducts);
-router.get("/:slug", getProductBySlug);
 
 // Admin-only protected routes
+router.get("/upload/signature", requireAuth, getCloudinarySignature);
 router.post("/", requireAuth, createProduct);
 router.put("/:id", requireAuth, updateProduct);
 router.delete("/:id", requireAuth, deleteProduct);
-router.get("/upload/signature", requireAuth, getCloudinarySignature);
+
+router.get("/:slug", getProductBySlug);
 
 export default router;

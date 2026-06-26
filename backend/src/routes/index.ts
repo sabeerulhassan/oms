@@ -20,9 +20,15 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
   
   if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD_HASH) {
+    const secret = process.env.JWT_SECRET;
+
+    if (!secret) {
+      return next(new AppError('Server auth configuration error', 500));
+    }
+
     const token = jwt.sign(
       { email, role: 'admin' }, 
-      process.env.JWT_SECRET || 'dev-fallback-secret', 
+      secret, 
       { expiresIn: '30d' }
     );
     return res.json({ token });
