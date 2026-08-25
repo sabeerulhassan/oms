@@ -74,7 +74,7 @@ export const createOrder = async (req: Request, res: Response) => {
         }
 
         cartTotal += sizeRecord.price * item.quantity;
-        summaryArr.push(`${item.quantity}x ${item.name} (${item.size})`);
+        summaryArr.push(`${item.quantity}x ${item.name} ${item.size}`);
       }
       secure_subtotal = cartTotal;
       secure_summary = summaryArr.join(', ');
