@@ -2,10 +2,10 @@ import { PoolClient } from "pg";
 import { generateLoyaltyCode } from "../utils/codeGenerator";
 
 const DISCOUNT_TIERS = [
-  { minOrder: 3500, discountAmount: 400, expiryDays: 90 },
-  { minOrder: 2000, discountAmount: 250, expiryDays: 60 },
-  { minOrder: 1000, discountAmount: 150, expiryDays: 45 },
-  { minOrder: 0,    discountAmount: 75,  expiryDays: 30 },
+  { minOrder: 3500, discountAmount: 400, expiryDays: 120 },
+  { minOrder: 2000, discountAmount: 250, expiryDays: 90 },
+  { minOrder: 1000, discountAmount: 150, expiryDays: 60 },
+  { minOrder: 0,    discountAmount: 75,  expiryDays: 60 },
 ];
 
 export async function runDeliveryTrigger(client: PoolClient, orderId: string): Promise<void> {
